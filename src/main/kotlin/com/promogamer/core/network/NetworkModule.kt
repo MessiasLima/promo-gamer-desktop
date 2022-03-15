@@ -1,16 +1,20 @@
 package com.promogamer.core.network
 
+import com.promogamer.core.network.deal.DealDataSource
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object NetworkModule {
-    private const val BASE_URL = "https://www.cheapshark.com"
+const val BASE_URL = "https://www.cheapshark.com"
 
-    fun provideCheapSharkService(): CheapSharkService {
-        return Retrofit.Builder()
+val networkModule = module {
+    single<CheapSharkService> {
+        Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CheapSharkService::class.java)
     }
+
+    factory { DealDataSource(get()) }
 }

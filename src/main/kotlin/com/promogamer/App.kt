@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.promogamer.core.ui.AppTheme
+import com.promogamer.di.startDependencyInjection
 import com.promogamer.presentation.main.MainPage
 import io.appoutlet.karavel.Karavel
 
@@ -20,6 +21,7 @@ fun App() {
 
 
 fun main() = application {
+    startDependencyInjection()
     Window(
         title = "PromoGamer",
         onCloseRequest = ::exitApplication,
